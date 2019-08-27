@@ -11,17 +11,31 @@ let _subscribers = {
     game: []
 }
 
-function _setState(propName, data) {
+function _setState(prop, data) {
     //NOTE add the data to the state
-    _state[propName] = data
+    _state[prop] = data
     //NOTE run every subscriber function that is watching that data
-    _subscribers[propName].forEach(fn => fn());
+    _subscribers[prop].forEach(fn => fn());
 }
-
+let _jedApi = axios.create({
+    baseURL: ""
+})
 //Public
 export default class JedService {
     //NOTE adds the subscriber function to the array based on the property it is watching
-    addSubscriber(propName, fn) {
-        _subscribers[propName].push(fn)
+    addSubscriber(prop, fn) {
+        _subscribers[prop].push(fn)
     }
+    get Game() {
+        return _state.game
+    }
+    getJed() {
+        _jedApi.get()
+            .then(res => {
+                let gam = new Game(res.data)
+                _setState("game", gam)
+        }
+    
 }
+}
+

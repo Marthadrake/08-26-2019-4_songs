@@ -18,7 +18,7 @@ export default class JedController {
     constructor() {
         //NOTE Register all subscribers
         _jedService.addSubscriber("game", _draw)
-        _jedService.querySelector(g.target.query.value)
+        _jedService.getJed()
         //NOTE Retrieve data
     }
 }
